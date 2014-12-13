@@ -45,7 +45,7 @@ case "$1" in
     ID=$(docker run -d luxifer/redis /bin/bash "exit 0")
     docker wait $ID > /dev/null
     IMAGE=$(docker commit $ID)
-    docker tag $IMAGE $REDIS_IMAGE
+    docker tag -f $IMAGE $REDIS_IMAGE
     # Launch container
     ID=$(docker run -v $VOLUME -p 6379 -d $REDIS_IMAGE /bin/start_redis.sh)
     sleep 4
